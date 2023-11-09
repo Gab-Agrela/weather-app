@@ -52,11 +52,11 @@ const InputSelect = () => {
       {!state.weatherConditions && (
         <Select>
           {!citiesList.length && state.name ? (
-            <Option>Carregando...</Option>
+            <Option style={{ border: "none" }}>Carregando...</Option>
           ) : (
             citiesList.map(({ name, state }, index) => (
               <Option key={index} onClick={() => handleOptionClick(index)}>
-                {`${name}, ${state}`}
+                {state ? `${name}, ${state}` : name}
               </Option>
             ))
           )}

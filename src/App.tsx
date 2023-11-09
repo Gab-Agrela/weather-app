@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { FaLocationDot } from "react-icons/fa6";
 
 import "./App.css";
-import { Data } from "./types";
+import { BackgroundProp, Data } from "./types";
+import { weatherColor } from "./utils/colors";
 import { InputSelect } from "./Components/InputSelect";
 import { SearchButton } from "./Components/SearchButton";
 import { WeatherBoard } from "./Components/WeatherBoard";
@@ -23,10 +24,14 @@ function App() {
     lon: "",
   });
 
+  const conditionName = state.weatherConditions?.main as string;
+  const weatherContainerBgColor =
+    weatherColor[conditionName] || weatherColor.Default;
+
   return (
     <AppContext.Provider value={{ state, setState }}>
       <Container>
-        <WeatherContainer>
+        <WeatherContainer backgroundColor={weatherContainerBgColor}>
           <SearchContainer>
             <FaLocationDot
               size={20}
@@ -51,7 +56,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const WeatherContainer = styled.div`
+const WeatherContainer = styled.div<BackgroundProp>`
   @media (min-width: 320px) {
     width: 100%;
   }
@@ -69,7 +74,7 @@ const WeatherContainer = styled.div`
   }
   height: 500px;
   border-radius: 30px;
-  background-color: #685d9b;
+  background-color: ${(props) => props.backgroundColor};
   padding: 30px;
 `;
 

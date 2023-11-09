@@ -22,6 +22,7 @@ const SearchButton = () => {
       name: data.name,
       icon: weatherIcon,
       description: data.weather[0].description,
+      main: data.weather[0].main,
       wind: Math.round(data.wind.speed * 3.6),
     };
     setState({
